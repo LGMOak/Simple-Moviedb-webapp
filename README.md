@@ -5,4 +5,5 @@ Shows only critical information without the bloat
 
 # Known Bugs
 Search function malfunctions
+
 Recommended Titles messes up
