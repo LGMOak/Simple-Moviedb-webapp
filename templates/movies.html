@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+    <body style="background-color:#343A40;">
+    <!-- Defining background colour for page -->  
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar border-bottom border-light">
+  <a class="navbar-brand" href="/popular">Home</a>
+  <a class="navbar-brand" href="/popular">Popular</a>
+  <a class="navbar-brand" href="/nowplaying">In Cinemas</a>
+  <a class="navbar-brand" href="/upcoming">Upcoming</a>
+  <a class="navbar-brand" href="/toprated">Top Rated</a>
+ <!-- Defining navbar and links and correspnding html page link and behaviour of navbar -->
+    
+    <form class="form-inline mr-2 mr-lg-0" method='GET' action='/search?'>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-light mr-2 mr-sm-0" type="submit">Search</button>
+    </form>
+</nav>
+  <!-- Creates a search bar and submit button in navbar which uses a GET request method to operate. Defines margin to right for alignment -->
+
+
+<br>
+<div class='container'>
+
+<div class='row'>
+<div class='col-4'>
+<div class="card bg-dark">
+  <img class="card-img-top" src="{{ imgurl + data['poster'] }}" alt="Card image">
+  <div class="card-body">
+    <h4 class="card-title text-white">{{  data['title']  }}</h4>
+    <p class="card-text text-light">Release date: {{  data['date']  }}</p>
+    <p class="card-text text-light">Revenue: ${{  data['revenue']  }}</p>
+    <p class="card-text text-light">Runtime: {{  data['runtime']  }} minutes</p>
+    <p class="card-text text-light">Rating: {{  data['rating']  }}/10: {{ rating }}</p>
+  </div>
+  <!-- Creates an image card and assigns all movie data from python to be displayed in here 
+       Cards organise data well by keeping all info in one place and makes the page look sleek and modern-->
+</div>
+</div>
+<div class='col'>
+  <div class="card bg-dark">
+  <img class="card-img" src="{{ imgurl + data['backdrop'] }}" alt="No Image Available" width=100% height=100%>
+  <div class="card-img">
+    <p class="card-text text-light">synopsis: {{  data['overview']  }}</p>
+
+  <div class='row'>
+{% for x in range(listlength) %}
+<div class="card bg-dark">
+  <div class="card-body text-light">{{ credits[x]['name'] }}</div>
+  <div class="card-body text-light">{{ credits[x]['character'] }}</div>
+</div>
+{% endfor %}
+<!-- Creates another card for cast members to be displayed -->
+</div>
+</div>
+  </div>
+</div>
+</div>
+
+<br>
+<div class='row'>
+  <div class='container'>
+<h2 style="color:white;"> Recommended Titles</h2>
+</div>
+<br>
+<div class='container'>
+<div class='row'>
+    {% for x in range(listlen) %}
+<div class='col'>
+  <div class="card bg-dark">
+<a href="{{ recommendation[x]['id'] }}">
+ <img class="card-img" src="{{ imgurl + recommendation[x]['poster_path'] }}" alt="No Image Available">
+</a>
+</div>
+</div>
+{% endfor %}
+<!-- Another card is created for Recommended movies user will see
+     If poster image cannot be reached, text is displayed instead -->
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

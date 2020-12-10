@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <body style="background-color:#343A40;">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar border-bottom border-light">
+  <a class="navbar-brand" href="/popular">Home</a>
+  <a class="navbar-brand" href="/popular">Popular</a>
+   <a class="navbar-brand" href="/nowplaying">In Cinemas</a>
+  <a class="navbar-brand" href="/upcoming">Upcoming</a>
+  <a class="navbar-brand" href="/toprated">Top Rated</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+    <form class="form-inline my-2 my-lg-0" method='GET' action='/search?'>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+<br>
+<div class='container'>
+<div class='row'>
+{% for x in range(listlen) %}
+<div class='col-md-4'>
+<div class="card bg-dark">
+  <img class="card-img-top" src="{{ imgurl + toprated[x]['poster_path'] }}" alt="Card image">
+  <div class="card-body">
+    <h4 class="card-title text-white">{{  toprated[x]['title']  }}</h4>
+    <p class="card-text text-white">{{  toprated[x]['overview']  }}</p>
+    <p class="card-text text-light">{{  toprated[x]['rating']  }}/10</p>
+    <a href="movies/{{ toprated[x]['id'] }}" class="btn btn-primary">See More</a>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
